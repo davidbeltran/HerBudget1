@@ -14,8 +14,7 @@ class Database:
                     Date text,
                     Details text,
                     Amount real
-                    )
-                    """)
+                    )""")
             conn.commit()
             conn.close()
         except sqlite3.OperationalError:
