@@ -12,7 +12,7 @@ class Statement:
 
     def __checkDuplicatePdf(self):
         fileName = "idStore.txt"
-        if not self.__searchPdf(fileName):
+        if not self.__searchForPdfFile(fileName):
             try:
                 f = open(fileName, "a")
                 f.write(self.pdfDocument + "\n")
@@ -24,7 +24,7 @@ class Statement:
             print(self.pdfDocument + " has already been processed.")
         return True
 
-    def __searchPdf(self, fileName):
+    def __searchForPdfFile(self, fileName):
         if os.path.exists(fileName):
             try:
                 f = open(fileName, "r")
