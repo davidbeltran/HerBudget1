@@ -1,10 +1,10 @@
 from statement import Statement
 
-chase = Statement('NovDec.pdf')
+chase = Statement('NovDec23.pdf')
 chase.sendToDatabase()
+#chase.practice()
 
 """TODO
--add year to expense dates
 -cast date to dates and amount to double
 -extract items and perform math
 """

@@ -8,7 +8,6 @@ class Statement:
         self.pdfDocument = pdfDocument
         self.reDetail = ('(?:\n((?:0[1-9]|1[1,2])/(?:0[1-9]|[12][0-9]|3[01]))\s*(.+)'
             + ' ((?:-\d+\.\d{2})|(?:\d+\.\d{2})))')
-        self.expenseList = []
 
     def __checkDuplicatePdf(self):
         fileName = "idStore.txt"
@@ -36,6 +35,11 @@ class Statement:
             except IOError:
                 print("Error reading file")
         return False
+    
+    def __getYear(self):
+            yearRegex = re.compile(r'\d{2}')
+            yearReSearch = yearRegex.search(self.pdfDocument)
+            return yearReSearch.group()
 
     def __preparePdf(self):
         reader = PdfReader(self.pdfDocument)
@@ -44,8 +48,17 @@ class Statement:
     
     def __createExpenseList(self):
         pdfTxt = self.__preparePdf()
-        self.expenseList = re.findall(self.reDetail, pdfTxt)
-        return self.expenseList
+        return self.__castDateAmount(re.findall(self.reDetail, pdfTxt))
+    
+    def __castDateAmount(self, strExpenseList):
+        expenseList = []
+        for exp in strExpenseList:
+            temp = []
+            temp.append(f"{exp[0]}/{self.__getYear()}")
+            temp.append(exp[1])
+            temp.append(exp[2])
+            expenseList.append(temp)
+        return expenseList
     
     def sendToDatabase(self):
         if not self.__checkDuplicatePdf():
