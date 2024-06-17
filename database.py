@@ -6,7 +6,7 @@ class Database:
         self.statementList = statementList
         self.name = 'expenses.db'
 
-    def createExpenseTable(self):
+    def __createExpenseTable(self):
         try:
             conn = sqlite3.connect(self.name)
             c = conn.cursor()
@@ -21,6 +21,7 @@ class Database:
             pass
 
     def fillExpenseTable(self):
+        self.__createExpenseTable()
         try:
             conn = sqlite3.connect(self.name)
             c = conn.cursor()

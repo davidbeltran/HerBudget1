@@ -5,6 +5,5 @@ chase.sendToDatabase()
 #chase.practice()
 
 """TODO
--cast date to dates and amount to double
 -extract items and perform math
 """
