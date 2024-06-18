@@ -1,11 +1,18 @@
+"""
+Author: David Beltran
+"""
 import sqlite3
 
 class Database:
 
+    # Class constructor
     def __init__(self, statementList):
         self.statementList = statementList
         self.name = 'expenses.db'
 
+    """
+    Creates an empty SQLite table
+    """
     def __createExpenseTable(self):
         try:
             conn = sqlite3.connect(self.name)
@@ -20,6 +27,9 @@ class Database:
         except sqlite3.OperationalError:
             pass
 
+    """
+    Fills SQLite table with list of expenses
+    """
     def fillExpenseTable(self):
         self.__createExpenseTable()
         try:

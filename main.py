@@ -1,3 +1,6 @@
+"""
+Author: David Beltran
+"""
 from statement import Statement
 
 chase = Statement('NovDec23.pdf')
